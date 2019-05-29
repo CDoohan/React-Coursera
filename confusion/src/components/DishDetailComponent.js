@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap'
+import React from 'react'
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap'
 
 import { baseUrl } from '../shared/baseUrl'
 
@@ -37,31 +37,24 @@ function RenderDish({dish}){
     );
 }
 
-export class DishDetail extends Component{
+export const DishDetail = (props) => {
 
-    constructor(props){
-        super(props)
-    }
-
-    render(){
-        if( this.props.dish != null ){
-            return(
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-md-5 m-1">
-                            <RenderDish dish={this.props.dish} />
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            { this.props.comments != null ? <RenderComments comments={this.props.comments} /> : <div></div> }
-                        </div>
+    if( props.dish != null ){
+        return(
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={props.dish} />
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        { props.comments != null ? <RenderComments comments={props.comments} /> : <div></div> }
                     </div>
                 </div>
-            )
-        }else{
-            return(
-                <div></div>
-            )
-        }
-        
+            </div>
+        )
+    }else{
+        return(
+            <div></div>
+        )
     }
 }

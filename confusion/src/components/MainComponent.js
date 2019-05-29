@@ -32,10 +32,10 @@ class Main extends Component{
 
     onCommentSelect(dishId){
 
-        let commentList = new Array();
+        let commentList = [];
 
         COMMENTS.filter( (comment) => {
-            return comment.dishId == dishId ? commentList.push(comment) : null;
+            return comment.dishId === dishId ? commentList.push(comment) : null;
         });
 
         this.setState({
