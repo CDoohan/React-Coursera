@@ -10,7 +10,7 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-function RenderComments({comments, addComment, dishId }){
+function RenderComments({comments, postComment, dishId }){
     var commentList = comments.map(comment => {
         return (
             <li key={comment.id} >
@@ -28,7 +28,7 @@ function RenderComments({comments, addComment, dishId }){
             <ul className="list-unstyled">
                 {commentList}
             </ul>
-            <CommentForm dishId={dishId} addComment={addComment} />
+            <CommentForm dishId={dishId} postComment={postComment} />
         </div>
     );
 }
@@ -90,7 +90,7 @@ export const DishDetail = (props) => {
                         <RenderComments 
                             comments={props.comments}
                             dishId={props.dish.id}
-                            addComment={props.addComment} />
+                            postComment={props.postComment} />
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@ export class CommentForm extends Component{
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
