@@ -105,11 +105,11 @@ export const fetchComments = () => (dispatch) => {
                     throw error;
                 }
             },
-            error =>{
+            error => {
                 var errmess = new Error(error.message);
-                
+
                 throw errmess;
-            })
+            }  )
             .then( response => response.json() )
             .then( comments => dispatch(addComments(comments)) )
             .catch( error => dispatch(commentsFailed(error.message)) )
@@ -142,9 +142,14 @@ export const fetchPromos = () => (dispatch) => {
                     throw error;
                 }
             }
-        , error => dispatch( promosFailed(error.message) ) )
+        , error => {
+            var errmess = new Error(error.message);
+
+            throw errmess;
+        })
         .then( response => response.json() )
-        .then( promos => dispatch( addPromos(promos) ));
+        .then( promos => dispatch( addPromos(promos) ))
+        .catch( error => dispatch(promosFailed(error.message)) )
 }
 
 export const promosLoading = () => ({
