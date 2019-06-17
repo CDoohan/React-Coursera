@@ -1,6 +1,7 @@
 // LIBS
 import React, {Component} from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 // COMPONENTS
 import Menu from './MenuComponent';
@@ -84,14 +85,18 @@ class Main extends Component{
             <div>
                 <Header />
 
-                <Switch>
-                    <Route path="/home" component={HomePage} ></Route>
-                    <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} ></Route>
-                    <Route exact path="/menu/:dishId" component={ DishWithId } ></Route>
-                    <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={ this.props.resetFeedbackForm } />} />} />
-                    <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} /> } />
-                    <Redirect to="/home" />
-                </Switch>
+                <TransitionGroup>
+                    <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                        <Switch>
+                            <Route path="/home" component={HomePage} ></Route>
+                            <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} ></Route>
+                            <Route exact path="/menu/:dishId" component={ DishWithId } ></Route>
+                            <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={ this.props.resetFeedbackForm } />} />} />
+                            <Route exact path='/aboutus' component={() => <About leaders={this.props.leaders} /> } />
+                            <Redirect to="/home" />
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
 
                 <Footer />
             </div>
